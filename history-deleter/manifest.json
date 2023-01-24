@@ -1,6 +1,6 @@
 {
   "background": {
-    "scripts": ["background.js"]
+    "scripts": ["browser-polyfill.js","background.js"]
   },
   "description": "Gives a popup to list and delete history on a domain.",
   "homepage_url": "https://github.com/mdn/webextensions-examples/tree/master/history-deleter",
