@@ -165,6 +165,21 @@ document.addEventListener("click", (e) => {
     });
   }
 
+  else if (e.target.id === "tabs-to-graph") {
+    function logTabs(tabs) {
+      for (const tab of tabs) {
+        // tab.url requires the `tabs` permission or a matching host permission.
+        console.log(tab.url);
+      }
+    }
+    
+    function onError(error) {
+      console.error(`Error: ${error}`);
+    }
+    
+    browser.tabs.query({ currentWindow: true }).then(logTabs, onError);
+  }
+
   else if (e.target.classList.contains('switch-tabs')) {
     let tabId = +e.target.getAttribute('href');
 
