@@ -41,13 +41,36 @@ class Graph {
 }
 
 function download(string, file, mime='text/json') {
-  var data = `data:${mime};charset=utf-8,` + encodeURIComponent(string)
+  /*data = `data:${mime};charset=utf-8,` + encodeURIComponent(string)
   var anchor = document.createElement('a')
   anchor.setAttribute("href", data)
+  anchor.setAttribute("target", "_blank")
+  anchor.text = "test me"
   anchor.setAttribute("download", file)
   document.body.appendChild(anchor) // required for firefox
   anchor.click()
-  anchor.remove()
+  //anchor.remove()*/
+
+
+
+  window.URL = window.webkitURL || window.URL;
+  file = new Blob([string],{type:'text/json'}); //we used to need to check for 'WebKitBlobBuilder' here - but no need anymore
+  /*file.append(string); //populate the file with whatever text it is that you want
+  var a = document.createElement('a');
+  a.href = window.URL.createObjectURL(file);
+  a.download = 'test.graph.json'; // set the file name
+  a.style.display = 'none';
+  document.body.appendChild(a);
+  console.log(a)
+  //a.click(); //this is probably the key - simulatating a click on a download link
+*/
+  browser.downloads.download({
+    url : window.URL.createObjectURL(file),
+    filename : 'test.graph.json',
+    conflictAction : 'uniquify'
+  });
+  //a.parentNode.removeChild(a);// we don't need this anymore
+
 }
 
 function firstUnpinnedTab(tabs) {
